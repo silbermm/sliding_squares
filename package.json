@@ -4,7 +4,7 @@
   "description": "Codetest for ZipScene - Sliding Squares",
   "main": "solver.js",
   "scripts": {
-    "test": "jasmine"
+    "test": "jasmine-node spec"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/silbermm/sliding_squares/issues"
   },
-  "homepage": "https://github.com/silbermm/sliding_squares"
+  "homepage": "https://github.com/silbermm/sliding_squares",
+  "devDependencies": {
+    "celeri": "^0.3.3",
+    "http": "0.0.0",
+    "jasmine-node": "^1.14.5"
+  }
 }
