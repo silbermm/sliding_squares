@@ -1,0 +1,19 @@
+{
+  "name": "zipscene_codetest",
+  "version": "0.0.1",
+  "description": "Codetest for ZipScene - Sliding Squares",
+  "main": "solver.js",
+  "scripts": {
+    "test": "jasmine"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/silbermm/sliding_squares.git"
+  },
+  "author": "Matt Silbernagel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/silbermm/sliding_squares/issues"
+  },
+  "homepage": "https://github.com/silbermm/sliding_squares"
+}
