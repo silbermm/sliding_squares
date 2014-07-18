@@ -1,5 +1,5 @@
 var puzzle = require("../lib/puzzle.js");
-
+var printf = require('printf');
 describe("solution", function(){
   it("should be true", function(){
     var s = [0,1,2,3,4,5,6,null];
@@ -17,7 +17,7 @@ describe("solution", function(){
 describe("preview", function(){
   it("should be pretty", function(){
     var s = [0,1,2,3,4,5,6,7,null]
-    var pretty = "0 | 1 | 2\r\n3 | 4 | 5\r\n6 | 7 | null\r\n"
+    var pretty = '    0 |    1 |    2\r\n    3 |    4 |    5\r\n    6 |    7 | null\r\n'
     expect(puzzle.buildPreview(s,3)).toBe(pretty);
   });
 });
@@ -54,5 +54,18 @@ describe("Find empty", function(){
     expect(coordinates.row).toBe(1);
     expect(coordinates.column).toBe(2);
   });
+
+  describe("Find Neighbors", function(){
+    it("should find 4",function(){
+      var twoD = [ [0,1,2],[3,null,4],[5,6,7] ];
+      var emptyT = puzzle.findEmpty(twoD);
+      var neighbors = puzzle.findNeighbors(twoD,emptyT);
+      expect(neighbors.length).toBe(4);
+    });
+  });
+
+
+
+
 });
 

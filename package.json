@@ -18,6 +18,7 @@
   "homepage": "https://github.com/silbermm/sliding_squares",
   "devDependencies": {
     "celeri": "^0.3.3",
+    "colors": "^0.6.2",
     "http": "0.0.0",
     "jasmine-node": "^1.14.5",
     "lodash": "^2.4.1",
