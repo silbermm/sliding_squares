@@ -1,4 +1,4 @@
-var cli = require('../solver.js');
+var cli = require('../lib/cli_parser.js');
 
 describe("cli", function(){
   it("should return size and difficulty", function(){

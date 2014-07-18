@@ -1,39 +1,30 @@
 // solver.js
 
-/**
- * Parse the command line arguments
- * @return 
- */.
-exports.parseCli = function(argv){
-  var celeri = require('celeri');
-  var cliData = null;
-  celeri.option({
-    command : 'solve :size :difficulty',
-    description : "Solves the ZipScene code test for difficulty [difficulty]",
-  }, function(data) {
-    cliData = data;
+var cli = require("./lib/cli_parser.js");
+var http_puzzle = require("./lib/http_puzzle.js");
+var puzzle = require("./lib/puzzle.js");
+var _ = require('lodash');
+
+var cliData = cli.parseCli(process.argv);
+http_puzzle.fetchPuzzle(cliData.size, cliData.difficulty, function(response){     
+  var res_data = '';     
+  response.on('data', function(chunk) {
+    res_data += chunk;
   });
-
-  celeri.parse(argv);
-  if(cliData === null){
-    console.error("Please specify the correct parameters.");
-    process.exit(1);
-  }
-  return cliData;
-}
-
-/**
- * Fetch a puzzle based on the parameters
- */
-exports.fetchPuzzle = function(size,difficulty,id){
-  var http = require('http');  
+  response.on('end', function() {
+    var resp = JSON.parse(res_data); 
    
-
-  
-  if(typeof id === "undefined"){
+    // pretty print please!
+    //console.log(puzzle);
     
-  }
-}
+  var preview = puzzle.buildPreview(resp.grid,resp.width);
+  console.log(preview);
+  var grid = puzzle.build2dArray(resp.grid,resp.width);
+  console.log(grid);
 
-var cliData = exports.parseCli(process.argv);
+    var totalMoves = 0
+  });
+});
+
+
 
