@@ -60,7 +60,8 @@ describe("Find empty", function(){
       var twoD = [ [0,1,2],[3,null,4],[5,6,7] ];
       var emptyT = puzzle.findEmpty(twoD);
       var neighbors = puzzle.findNeighbors(twoD,emptyT);
-      expect(neighbors.length).toBe(4);
+      expect(neighbors.up.row).toBe(0);
+      expect(neighbors.down.row).toBe(2);
     });
   });
 
