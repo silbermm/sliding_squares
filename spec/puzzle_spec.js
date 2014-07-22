@@ -1,5 +1,7 @@
 var puzzle = require("../lib/puzzle.js");
 var printf = require('printf');
+var Coordinate = puzzle.Coordinate;
+
 describe("solution", function(){
   it("should be true", function(){
     var s = [0,1,2,3,4,5,6,null];
@@ -58,14 +60,18 @@ describe("Find empty", function(){
   describe("Find Neighbors", function(){
     it("should find 4",function(){
       var twoD = [ [0,1,2],[3,null,4],[5,6,7] ];
-      var emptyT = puzzle.findEmpty(twoD);
-      var neighbors = puzzle.findNeighbors(twoD,emptyT);
+      var neighbors = puzzle.findNeighbors(twoD);
       expect(neighbors.up.row).toBe(0);
       expect(neighbors.down.row).toBe(2);
     });
   });
 
-
+  describe("is neighbor", function(){
+    it("should be", function(){
+      var twoD = [ [0,1,2],[3,null,4],[5,6,7] ];
+      expect(puzzle.isNeighbor(twoD, new Coordinate(1,0))).toBe(true);
+    });
+  });
 
 
 });
