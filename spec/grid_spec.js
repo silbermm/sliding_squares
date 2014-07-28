@@ -95,6 +95,29 @@ describe("Grid", function(){
     var twoD = [ [0,1,2],[3,4,5],[6,7,null] ];
     expect(grid.grid).toEqual(twoD);
  });
+  
+ it("should equal the other grid", function(){
+    var s = [0,1,2,3,4,5,6,7,null];
+    var t = [0,1,2,3,4,5,6,7,null];
+    var grid1 = new Grid(s,3);
+    var grid2 = new Grid(t,3);
+    grid1.setup();
+    grid2.setup();
+
+    expect(grid1.isEqual(grid2)).toBe(true);
+ });
+ 
+ it("should NOT equal the other grid", function(){
+    var s = [0,1,2,3,4,5,6,7,null];
+    var t = [0,null,2,3,4,5,6,7,1];
+    var grid1 = new Grid(s,3);
+    var grid2 = new Grid(t,3);
+    grid1.setup();
+    grid2.setup();
+
+    expect(grid1.isEqual(grid2)).toBe(false);
+ });
+
 
   
 });

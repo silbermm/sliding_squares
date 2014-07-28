@@ -7,6 +7,9 @@ var printf = require('printf');
 var Grid = require('./lib/grid.js').Grid;
 var width = 0;
 
+// The fontier is an array of grids that have already been processed.
+var frontier = [];
+
 var cliData = cli.parseCli(process.argv);
 http_puzzle.fetchPuzzle(cliData.size, cliData.difficulty, function(response){     
   var res_data = '';     
@@ -52,8 +55,6 @@ http_puzzle.fetchPuzzle(cliData.size, cliData.difficulty, function(response){
           console.log(solutionGrid.moves);
           console.log("\n");
           console.log(solutionGrid.prettyPrint()); 
-        
-
         } else {
           console.log("unable to find and verifiy a solution.");
         }
@@ -64,13 +65,13 @@ http_puzzle.fetchPuzzle(cliData.size, cliData.difficulty, function(response){
 });
 
 
-
 /**
  * Recursive function to find a solution!
  * @param an array of grids 
  */
-var findSolution = function(grids){
+var findSolution = function(grids){ 
   var solutionGrid = null;
+  console.log("searching " + grids.length + " different grids...");
   var gridA = [];
   _.each(grids,function(g){
     if(g.isSolution()){
@@ -81,7 +82,14 @@ var findSolution = function(grids){
     _.each(neighbors, function(t){
       var newGrid = _.clone(g,true);
       newGrid.moveTile(t);
-      gridA.push(newGrid);
+      // is the new grid a solution?
+      if(newGrid.isSolution()){
+        solutionGrid = newGrid;
+        return false;
+      } 
+      if(!searchFrontier(newGrid)){
+        gridA.push(newGrid);
+      }
     });
   }); 
   if(solutionGrid != null){
@@ -90,7 +98,25 @@ var findSolution = function(grids){
   return findSolution(gridA);
 }
 
+/**
+ * Search the frontier array for the given grid
+ *
+ * @param the grid to look for in the frontier
+ * @return true if the grid exists in the array 
+ */
+var searchFrontier = function(grid){
+  var found = _.find(frontier, function(f){
+    return grid.isEqual(f);
+  });
+  if(found) {
+   return true;
+  } else {
+    frontier.push(grid);
+  }
+  return false;
+}
 
+exports.searchFrontier = searchFrontier;
 
 
 
